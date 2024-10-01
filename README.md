@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# AlgoViz – String Algorithms Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**AlgoViz** is an interactive web-based tool designed to help users visualize and understand string matching algorithms like the **Z-algorithm** and **Boyer-Moore algorithm**. It provides step-by-step demonstrations with real-time updates and dynamic visual elements, making it easier to follow along and grasp the underlying logic of these algorithms.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Z-algorithm visualization**: Demonstrates how the Z-algorithm computes the Z-array and uses it for pattern matching.
+- **Boyer-Moore visualization** (in progress): Illustrates the Boyer-Moore algorithm's two heuristics: the bad character rule and the good suffix rule.
+- **Real-time interactivity**: Users can input their own patterns and text, seeing immediate visual feedback as the algorithm processes the data.
+- **Dynamic visuals**: Clean, intuitive UI that highlights key algorithm steps, making the learning experience engaging and easy to follow.
+- **Step-by-step breakdown**: Detailed explanations accompany each step, giving users a deeper understanding of how the algorithm works at each stage.
+- **Input customization**: Users can input custom text and patterns for the algorithms to process.
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run the project locally:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/algoviz.git
+   ```
 
-### `npm test`
+2. Navigate to the project directory:
+   ```bash
+   cd algoviz
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Install the necessary dependencies (if any):
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+4. Run the application:
+   ```bash
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Open the application in your browser.
+2. Choose between the **Z-algorithm** or **Boyer-Moore algorithm** from the home screen.
+3. Input a **text** and a **pattern**.
+4. Follow the visualization as the algorithm processes your input step-by-step.
+5. Read the accompanying explanations that explain each step of the algorithm.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Algorithms Supported
 
-### `npm run eject`
+### Z-algorithm
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The Z-algorithm constructs a **Z-array** for a given string. It is often used for pattern matching and can compute the longest common prefix efficiently.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Time Complexity: O(n)
+- Use cases: Pattern matching, string compression, and computational biology.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Boyer-Moore Algorithm (in progress)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Boyer-Moore is a powerful string-searching algorithm that uses two main heuristics: the **bad character rule** and the **good suffix rule**. It is particularly efficient for long texts.
 
-## Learn More
+- Time Complexity: O(n/m) on average
+- Use cases: Text search, document indexing, and computational linguistics.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Future Enhancements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Additional Algorithms**: Plans to add support for more string matching algorithms such as Knuth-Morris-Pratt (KMP) and Rabin-Karp.
+- **Performance Metrics**: Add real-time performance measurements to compare algorithm efficiency for different input sizes.
+- **Mobile Compatibility**: Improve responsiveness for mobile and tablet users.
