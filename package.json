@@ -11,7 +11,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://Shubhi0406.github.io/algo-viz",
+  "homepage": "https://Shubhi0406.github.io/AlgoViz",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
