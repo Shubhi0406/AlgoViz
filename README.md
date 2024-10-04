@@ -2,6 +2,11 @@
 
 **AlgoViz** is an interactive web-based tool designed to help users visualize and understand string matching algorithms like the **Z-algorithm** and **Boyer-Moore algorithm**. It provides step-by-step demonstrations with real-time updates and dynamic visual elements, making it easier to follow along and grasp the underlying logic of these algorithms.
 
+## Live Demo
+
+You can view the live demo of AlgoViz here: [AlgoViz on GitHub Pages](https://Shubhi0406.github.io/AlgoViz)
+
+
 ## Features
 
 - **Z-algorithm visualization**: Demonstrates how the Z-algorithm computes the Z-array and uses it for pattern matching.
