@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/algo-viz/static/css/main.80d87911.css",
-    "main.js": "/algo-viz/static/js/main.aeacaf63.js",
-    "static/js/453.24ac71dc.chunk.js": "/algo-viz/static/js/453.24ac71dc.chunk.js",
-    "index.html": "/algo-viz/index.html",
-    "main.80d87911.css.map": "/algo-viz/static/css/main.80d87911.css.map",
-    "main.aeacaf63.js.map": "/algo-viz/static/js/main.aeacaf63.js.map",
-    "453.24ac71dc.chunk.js.map": "/algo-viz/static/js/453.24ac71dc.chunk.js.map"
+    "main.css": "/AlgoViz/static/css/main.80d87911.css",
+    "main.js": "/AlgoViz/static/js/main.92b5a1b8.js",
+    "static/js/453.24ac71dc.chunk.js": "/AlgoViz/static/js/453.24ac71dc.chunk.js",
+    "index.html": "/AlgoViz/index.html",
+    "main.80d87911.css.map": "/AlgoViz/static/css/main.80d87911.css.map",
+    "main.92b5a1b8.js.map": "/AlgoViz/static/js/main.92b5a1b8.js.map",
+    "453.24ac71dc.chunk.js.map": "/AlgoViz/static/js/453.24ac71dc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.80d87911.css",
-    "static/js/main.aeacaf63.js"
+    "static/js/main.92b5a1b8.js"
   ]
 }
