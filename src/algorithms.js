@@ -57,5 +57,64 @@ export function zAlgorithm(S) {
     }
     return Z;
   }
+
+  let NO_OF_CHARS = 256; // Number of possible characters (ASCII)
+
+// Helper function to find the maximum of two numbers
+function max(a, b) {
+  return (a > b) ? a : b;
+}
+
+// Bad character heuristic: Preprocessing to build the bad character table
+function badCharHeuristic(pattern, size, badchar) {
+  // Initialize all occurrences as -1
+  for (let i = 0; i < NO_OF_CHARS; i++) {
+    badchar[i] = -1;
+  }
+
+  // Fill the actual value of the last occurrence of a character
+  for (let i = 0; i < size; i++) {
+    badchar[pattern[i].charCodeAt(0)] = i;  // ASCII-based table
+  }
+}
+
+// Boyer-Moore search function using bad character heuristic
+export function boyerMooreSearch(text, pattern) {
+  const m = pattern.length;
+  const n = text.length;
   
+  let badchar = new Array(NO_OF_CHARS);
+  
+  // Fill the bad character table for the given pattern
+  badCharHeuristic(pattern, m, badchar);
+  
+  let s = 0;  // s is the shift of the pattern with respect to text
+  const result = [];
+  
+  // Process the text and pattern
+  while (s <= (n - m)) {
+    let j = m - 1;
+
+    // Keep reducing index j while characters of pattern and text are matching
+    while (j >= 0 && pattern[j] === text[s + j]) {
+      j--;
+    }
+
+    // If the pattern is found
+    if (j < 0) {
+      result.push(s);  // Store the index of the match
+      console.log("Pattern found at index: " + s);
+
+      // Shift pattern to align with the next character in the text
+      s += (s + m < n) ? m - badchar[text[s + m].charCodeAt(0)] : 1;
+    }
+    else {
+      // Shift the pattern so that the bad character aligns with the last occurrence in the pattern
+      s += max(1, j - badchar[text[s + j].charCodeAt(0)]);
+    }
+  }
+
+  return result;
+}
+
   

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { zAlgorithm, zAlgorithmSteps } from '../algorithms';
+import { zAlgorithm, zAlgorithmSteps, boyerMooreSearch } from '../algorithms';
 import './Visualization.css';
 
 function Visualization({ algorithm, string, pattern }) {
@@ -34,6 +34,9 @@ function Visualization({ algorithm, string, pattern }) {
       setStepDescription('Initializing Z-array...');
       setStepIndex(0);
       setIsLastStep(false);
+    } else if (algorithm === 'boyer-moore' && string && pattern) {
+      const result = boyerMooreSearch(string, pattern);
+      console.log(result);
     } else {
       setFinalResult({ Z: [], matches: [] });
       setCurrentState(null);
