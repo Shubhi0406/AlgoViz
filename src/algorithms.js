@@ -1,36 +1,69 @@
 // Z-Algorithm step-by-step generator
 export function* zAlgorithmSteps(S) {
-    const Z = Array(S.length).fill(0);  // Initialize Z-array with zeros
-    let L = 0, R = 0;  // Initialize [L, R] window
-  
-    for (let i = 1; i < S.length; i++) {
-      if (i > R) {
-        L = R = i;
+  const Z = Array(S.length).fill(0);  // Initialize Z-array with zeros
+  let L = 0, R = 0;  // Initialize [L, R] window
+
+  for (let i = 1; i < S.length; i++) {
+    if (i > R) {
+      L = R = i;
+      while (R < S.length && S[R - L] === S[R]) {
+        R++;
+        yield { Z, i, L, R };  // Yield the current state
+      }
+      Z[i] = R - L;
+      R--;
+      yield { Z, i, L, R };  // Yield the state after updating Z[i]
+    } else {
+      let k = i - L;
+      if (Z[k] < R - i + 1) {
+        Z[i] = Z[k];
+        yield { Z, i, L, R };  // Yield the state after copying Z[k]
+      } else {
+        L = i;
         while (R < S.length && S[R - L] === S[R]) {
           R++;
-          yield { Z, i, L, R };  // Yield the current state
+          yield { Z, i, L, R };  // Yield while extending the window
         }
         Z[i] = R - L;
         R--;
         yield { Z, i, L, R };  // Yield the state after updating Z[i]
-      } else {
-        let k = i - L;
-        if (Z[k] < R - i + 1) {
-          Z[i] = Z[k];
-          yield { Z, i, L, R };  // Yield the state after copying Z[k]
-        } else {
-          L = i;
-          while (R < S.length && S[R - L] === S[R]) {
-            R++;
-            yield { Z, i, L, R };  // Yield while extending the window
-          }
-          Z[i] = R - L;
-          R--;
-          yield { Z, i, L, R };  // Yield the state after updating Z[i]
-        }
       }
     }
   }
+}
+
+// Boyer-Moore step-by-step generator
+export function* boyerMooreSteps(text, pattern) {
+  const m = pattern.length;
+  const n = text.length;
+  let badchar = new Array(NO_OF_CHARS);
+  badCharHeuristic(pattern, m, badchar);  // Preprocess pattern for bad character rule
+
+  let s = 0;  // s is the shift of the pattern with respect to text
+
+  // Process the text and pattern
+  while (s <= (n - m)) {
+    let j = m - 1;
+
+    // Keep reducing index j while characters of pattern and text are matching
+    while (j >= 0 && pattern[j] === text[s + j]) {
+      j--;
+    }
+
+    // If the pattern is found
+    if (j < 0) {
+      yield { s, match: true, shift: s + m };  // Yield the match found and the shift
+      s += (s + m < n) ? m - badchar[text[s + m].charCodeAt(0)] : 1;
+    } else {
+      // Apply bad character rule and calculate the shift
+      const badCharShift = j - badchar[text[s + j].charCodeAt(0)];
+      const shift = max(1, badCharShift);
+      yield { s, match: false, shift, j };  // Yield current state with shift and mismatch info
+      s += shift;
+    }
+  }
+}
+
 
 // Z-Algorithm to compute the final Z-array for a given string
 export function zAlgorithm(S) {
