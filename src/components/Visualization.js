@@ -32,6 +32,8 @@ function Visualization({ algorithm, string, pattern }) {
       setStepDescription('Initializing Z-array...');
       setStepIndex(0);
       setIsLastStep(false);
+
+      setStepZArray(new Array(combinedString.length).fill(0));
     } else if (algorithm === 'boyer-moore' && string && pattern) {
       generatorRef.current = boyerMooreSteps(string, pattern);
       const firstStep = generatorRef.current.next().value;
@@ -45,6 +47,7 @@ function Visualization({ algorithm, string, pattern }) {
       setCurrentState(null);
       setStepHistory([]);
       setStepIndex(0);
+      setStepZArray([]);
     }
   }, [algorithm, string, pattern]);
 
