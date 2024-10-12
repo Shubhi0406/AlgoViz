@@ -35,6 +35,13 @@ function Visualization({ algorithm, string, pattern }) {
 
       setStepZArray(new Array(combinedString.length).fill(0));
     } else if (algorithm === 'boyer-moore' && string && pattern) {
+      if (pattern.length > string.length) {
+        setFinalResult({ Z: [], matches: [] });
+        setCurrentState(null);
+        setStepDescription('Error: Pattern is longer than the text.');
+        return;  // Exit early if pattern is longer than text
+      }
+
       generatorRef.current = boyerMooreSteps(string, pattern);
       const firstStep = generatorRef.current.next().value;
       setCurrentState(firstStep);
@@ -110,8 +117,17 @@ function Visualization({ algorithm, string, pattern }) {
       setStepIndex(0);
       setStepDescription('Resetting to the beginning...');
       setIsLastStep(false);
-
-      setStepZArray(new Array(firstStep.Z.length).fill(0));
+      
+      if (algorithm === 'z-algorithm') {
+        setStepZArray(new Array(firstStep.Z.length).fill(0));  // Reset Z-array for Z-Algorithm
+      } else if (algorithm === 'boyer-moore') {
+        // For Boyer-Moore, reset the state
+        setStepHistory([]);
+        generatorRef.current = boyerMooreSteps(string, pattern);
+        const firstStepBM = generatorRef.current.next().value;
+        setCurrentState(firstStepBM);
+        setStepHistory([firstStepBM]);
+      }
     }
   };
 
@@ -134,10 +150,20 @@ function Visualization({ algorithm, string, pattern }) {
   };
 
   // Highlight text for Z-Algorithm or Boyer-Moore
+
   const highlightText = (text, L, R) => {
     return text.split('').map((char, index) => {
       if (index >= L && index <= R) {
         return <span key={index} className="highlight" title={`Window [L=${L}, R=${R}]`}>{char}</span>;
+      }
+      return <span key={index}>{char}</span>;
+    });
+  }
+
+  const highlightBoyerMooreText = (text, shift, patternLength) => {
+    return text.split('').map((char, index) => {
+      if (index >= shift && index < shift + patternLength) {
+        return <span key={index} className="highlight" title={`Shift at ${shift}`}>{char}</span>;
       }
       return <span key={index}>{char}</span>;
     });
@@ -155,9 +181,18 @@ function Visualization({ algorithm, string, pattern }) {
       <div className="text-section">
         <p><strong>Text:</strong></p>
         <p className="text-content">
-          {currentState ? highlightText(string, currentState.L - pattern.length - 1, currentState.R - pattern.length - 1) : string}
+          {currentState ? 
+            (algorithm === 'z-algorithm' 
+              ? highlightText(string, currentState.L - pattern.length - 1, currentState.R - pattern.length - 1)
+              : highlightBoyerMooreText(string, currentState.s, pattern.length)
+            ) 
+          : string}
         </p>
       </div>
+
+        {/* <p className="text-content">
+          {currentState ? highlightText(string, currentState.L - pattern.length - 1, currentState.R - pattern.length - 1) : string}
+        </p> */}
 
       <div className="pattern-section">
         <p><strong>Pattern:</strong> {pattern}</p>
